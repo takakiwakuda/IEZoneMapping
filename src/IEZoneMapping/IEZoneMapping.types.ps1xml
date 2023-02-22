@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Types>
+  <Type>
+    <Name>IEZoneMapping.ZoneMapping</Name>
+    <Members>
+      <AliasProperty>
+        <Name>Website</Name>
+        <ReferencedMemberName>Pattern</ReferencedMemberName>
+      </AliasProperty>
+    </Members>
+  </Type>
+</Types>

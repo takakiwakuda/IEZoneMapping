@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemlyName>IEZoneMapping</AssemlyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <PackageReference Include="System.Management.Automation" Version="7.3.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="IEZoneMapping.psd1" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="IEZoneMapping.types.ps1xml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="IEZoneMapping.format.ps1xml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
