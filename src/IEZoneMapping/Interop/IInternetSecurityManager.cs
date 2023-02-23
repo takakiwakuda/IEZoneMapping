@@ -4,7 +4,8 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace IEZoneMapping.Interop;
 
-enum SZM_FLAGS
+[Flags]
+enum SZM_FLAGS : uint
 {
     SZM_CREATE = 0x00000000,
     SZM_DELETE = 0x00000001
