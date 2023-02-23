@@ -105,7 +105,7 @@ internal class InternetSecurityManager : IDisposable
             string[] strings = new string[1];
             int count;
 
-            while (enumString.Next(1, strings, ptr) != HResults.S_FALSE)
+            while (enumString.Next(1, strings, ptr) == HResults.S_OK)
             {
                 count = Marshal.ReadInt32(ptr);
                 if (count == 0)
