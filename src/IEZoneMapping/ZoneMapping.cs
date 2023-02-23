@@ -21,10 +21,11 @@ public sealed class ZoneMapping
     private readonly ZoneType _zoneType;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ZoneMapping"/> class.
+    /// Initializes a new instance of the <see cref="ZoneMapping"/> class
+    /// with the specified pattern and the zone type.
     /// </summary>
-    /// <param name="pattern"></param>
-    /// <param name="zoneType"></param>
+    /// <param name="pattern">The pattern mapped to the zone.</param>
+    /// <param name="zoneType">The type of zone.</param>
     /// <exception cref="ArgumentNullException">
     /// <paramref name="pattern"/> is <see langword="null"/>.
     /// </exception>

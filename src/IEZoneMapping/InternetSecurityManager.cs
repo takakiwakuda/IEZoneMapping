@@ -7,6 +7,9 @@ using IEZoneMapping.Interop;
 
 namespace IEZoneMapping;
 
+/// <summary>
+/// This class provides working with get, add, and remove a mapping for an Internet Explorer zone.
+/// </summary>
 internal class InternetSecurityManager : IDisposable
 {
     private IInternetSecurityManager _internetSecurityManager;
@@ -51,8 +54,8 @@ internal class InternetSecurityManager : IDisposable
     /// <summary>
     /// Adds a zone mapping with the specified pattern and zone type.
     /// </summary>
-    /// <param name="zoneType">Type of zone to map to.</param>
     /// <param name="pattern">The pattern to be added.</param>
+    /// <param name="zoneType">Type of zone to map to.</param>
     /// <exception cref="FormatException">
     /// <paramref name="pattern"/> is a non-SSL site.
     /// </exception>
@@ -129,8 +132,8 @@ internal class InternetSecurityManager : IDisposable
     /// <summary>
     /// Removes a zone mapping with the specified pattern and zone type.
     /// </summary>
-    /// <param name="zoneType">Type of zone to map to.</param>
     /// <param name="pattern">The pattern to be removed.</param>
+    /// <param name="zoneType">Type of zone to map to.</param>
     /// <exception cref="FormatException">
     /// <paramref name="pattern"/> is a non-SSL site.
     /// </exception>
