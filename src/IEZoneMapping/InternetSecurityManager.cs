@@ -130,6 +130,30 @@ internal class InternetSecurityManager : IDisposable
     }
 
     /// <summary>
+    /// Gets the zone type for the specified pattern.
+    /// </summary>
+    /// <param name="pattern">The pattern to use.</param>
+    /// <returns>
+    /// A <see cref="ZoneType"/> value representing the zone that maps the <paramref name="pattern"/>.
+    /// </returns>
+    /// <exception cref="ObjectDisposedException">
+    /// This object was disposed.
+    /// </exception>
+    public ZoneType GetZoneType(string pattern)
+    {
+        ThrowIfDisposed();
+
+        int errorCode = _internetSecurityManager.MapUrlToZone(pattern, out uint zone, 0);
+        if (errorCode != HResults.S_OK && errorCode != HResults.E_INVALIDARG)
+        {
+            // Make assurance double sure...
+            throw GetExceptionForHR(errorCode)!;
+        }
+
+        return (ZoneType)zone;
+    }
+
+    /// <summary>
     /// Removes a zone mapping with the specified pattern and zone type.
     /// </summary>
     /// <param name="pattern">The pattern to be removed.</param>
@@ -152,6 +176,34 @@ internal class InternetSecurityManager : IDisposable
         SetZoneMapping(zoneType, pattern, SZM_FLAGS.SZM_DELETE);
     }
 
+    private static Exception? GetExceptionForHR(int errorCode, string? pattern = null, ZoneType? zoneType = null)
+    {
+        if (errorCode == HResults.S_OK)
+        {
+            return null;
+        }
+
+        string message;
+
+        switch (errorCode)
+        {
+            case HResults.E_ACCESSDENIED:
+                message = $"The site '{pattern}' added to {zoneType} zone must use the https:// prefix.";
+                return new FormatException(message);
+
+            case HResults.E_FILEEXISTS:
+                message = $"The site '{pattern}' is already in the {zoneType} zone.";
+                return new IOException(message, errorCode);
+
+            case HResults.E_INVALIDARG:
+                message = $"Cannot use an invalid wildcard sequence in the site '{pattern}'.";
+                return new FormatException(message);
+
+            default:
+                return Marshal.GetExceptionForHR(errorCode);
+        }
+    }
+
     /// <summary>
     /// Maps the specified pattern into the specified zone.
     /// </summary>
@@ -169,25 +221,7 @@ internal class InternetSecurityManager : IDisposable
         int errorCode = _internetSecurityManager.SetZoneMapping((uint)zoneType, pattern, flags);
         if (errorCode != HResults.S_OK)
         {
-            string message;
-
-            switch (errorCode)
-            {
-                case HResults.E_ACCESSDENIED:
-                    message = $"The site '{pattern}' added to {zoneType} zone must use the https:// prefix.";
-                    throw new FormatException(message);
-
-                case HResults.E_FILEEXISTS:
-                    message = $"The site '{pattern}' is already in the {zoneType} zone.";
-                    throw new IOException(message, errorCode);
-
-                case HResults.E_INVALIDARG:
-                    message = $"Cannot use an invalid wildcard sequence in the site '{pattern}'.";
-                    throw new FormatException(message);
-
-                default:
-                    throw Marshal.GetExceptionForHR(errorCode)!;
-            }
+            throw GetExceptionForHR(errorCode, pattern, zoneType)!;
         }
     }
 

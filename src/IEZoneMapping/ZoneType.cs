@@ -8,21 +8,25 @@ public enum ZoneType
     /// <summary>
     /// My Computer zone.
     /// </summary>
-    MyComputer,
+    MyComputer = 0,
     /// <summary>
     /// Intranet zone.
     /// </summary>
-    LocalIntranet,
+    LocalIntranet = 1,
     /// <summary>
     /// Trusted Sites zone.
     /// </summary>
-    TrustedSite,
+    TrustedSite = 2,
     /// <summary>
     /// Internet zone.
     /// </summary>
-    Internet,
+    Internet = 3,
     /// <summary>
     /// Restricted Sites zone.
     /// </summary>
-    RestrictedSite
+    RestrictedSite = 4,
+    /// <summary>
+    /// Invalid zone.
+    /// </summary>
+    Invalid = -1,
 }

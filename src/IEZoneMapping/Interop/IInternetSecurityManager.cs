@@ -21,7 +21,8 @@ internal interface IInternetSecurityManager
 
     void GetSecuritySite(out nint ppSite);
 
-    void MapUrlToZone(
+    [PreserveSig]
+    int MapUrlToZone(
         [MarshalAs(UnmanagedType.LPWStr)] string pwszUrl,
         out uint pdwZone,
         uint dwFlags);
