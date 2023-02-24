@@ -90,7 +90,7 @@ internal class InternetSecurityManager : IDisposable
 
         // TODO Add parameter validations if you want to expose this class as a global class.
 
-        int errorCode = _internetSecurityManager.GetZoneMappings((uint)zoneType, out IEnumString enumString, 0);
+        int errorCode = _internetSecurityManager.GetZoneMappings((int)zoneType, out IEnumString enumString, 0);
         if (errorCode != HResults.S_OK)
         {
             // Make assurance double sure...
@@ -143,7 +143,7 @@ internal class InternetSecurityManager : IDisposable
     {
         ThrowIfDisposed();
 
-        int errorCode = _internetSecurityManager.MapUrlToZone(pattern, out uint zone, 0);
+        int errorCode = _internetSecurityManager.MapUrlToZone(pattern, out int zone, 0);
         if (errorCode != HResults.S_OK && errorCode != HResults.E_INVALIDARG)
         {
             // Make assurance double sure...
@@ -218,7 +218,7 @@ internal class InternetSecurityManager : IDisposable
     /// </exception>
     private void SetZoneMapping(ZoneType zoneType, string pattern, SZM_FLAGS flags)
     {
-        int errorCode = _internetSecurityManager.SetZoneMapping((uint)zoneType, pattern, flags);
+        int errorCode = _internetSecurityManager.SetZoneMapping((int)zoneType, pattern, flags);
         if (errorCode != HResults.S_OK)
         {
             throw GetExceptionForHR(errorCode, pattern, zoneType)!;

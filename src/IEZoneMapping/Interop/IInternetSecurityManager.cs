@@ -24,7 +24,7 @@ internal interface IInternetSecurityManager
     [PreserveSig]
     int MapUrlToZone(
         [MarshalAs(UnmanagedType.LPWStr)] string pwszUrl,
-        out uint pdwZone,
+        out int pdwZone,
         uint dwFlags);
 
     void GetSecurityId(
@@ -54,13 +54,13 @@ internal interface IInternetSecurityManager
 
     [PreserveSig]
     int SetZoneMapping(
-        uint dwZone,
+        int dwZone,
         [MarshalAs(UnmanagedType.LPWStr)] string lpszPattern,
         SZM_FLAGS dwFlags);
 
     [PreserveSig]
     int GetZoneMappings(
-        uint dwZone,
+        int dwZone,
         out IEnumString ppenumString,
         uint dwFlags);
 }
